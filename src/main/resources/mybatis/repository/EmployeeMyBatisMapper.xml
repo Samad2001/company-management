@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.example.companymanagement.repository.EmployeeRepository">
+
+    <select id="findAll" resultType="Department">
+        SELECT <include refid="DepartmentBaseColumns"></include>
+        FROM employee.id_ i
+    </select>
+
+    <select id="findById" resultType="Employee">
+        SELECT <include refid="EmployeeBaseColumns"></include>
+        FROM Employee.id_ i
+        <where>
+            i.id = #{id}
+        </where>
+    </select>
+
+    <insert id="insert">
+        INSERT
+        INTO vs.acedemy.employee (name,
+                                    created_at,
+                                    updated_at)
+        VALUES (#{name, jdbcType=NVARCHAR},
+                #{created_at},
+                #{updated_at})
+    </insert>
+
+    <update id="update">
+        UPDATE vs.acedemy.employee i
+        SET i.name = #{name, jdbcType=NVARCHAR},
+        created_at = #{series},
+        updated_at = #{ created_at}
+        <where>
+            i.id = #{id}
+        </where>
+    </update>
+
+    <delete id="delete">
+        DELETE
+        FROM vs.acedemy.employee i
+        <where>
+            i.id = #{id}
+        </where>
+    </delete>
+
+    <sql id="employeeBaseColumns">
+        i.id,
+            i.name,
+            i.created_at,
+            i.updated_at,
+    </sql>
+
+</mapper>

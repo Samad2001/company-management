@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.example.companymanagement.repository.DepartmentRepository">
+
+    <select id="findAll" resultType="Department">
+        SELECT
+            d.department_id,
+            d.dep_name,
+            d.created_atDep,
+            d.updated_atDep
+            FROM vs_learning.department;
+
+        FROM department.id d
+    </select>
+
+    <select id="findById" resultType="Department">
+        SELECT <include refid="DepartmentBaseColumns"></include>
+        FROM department.id d
+        <where>
+            d.departmentId = #{departmentid};
+        </where>
+    </select>
+
+    <insert id="insert">
+        INSERT
+        INTO vs.acedemy.department d
+                                (name,
+                                created_at,
+                                updated_at)
+        VALUES (
+                #{name},
+                #{created_at},
+                #{updated_at})
+    </insert>
+
+    <update id="updateDep">
+        UPDATE vs.acedemy.department d
+        SET d.name = #{name},
+            d.created_at = #{ createdAt},
+            d.updated_at = #{ updatedAt}
+            where d.departmentId=#{departmentid};
+    </update>
+
+    <delete id="delete">
+        DELETE
+        FROM vs.acedemy.department d
+        <where>
+            d.id = #{departmentId}
+        </where>
+    </delete>
+
+    <sql id="departmentBaseColumns">
+            d.departmentId,
+            d.name,
+            d.created_at,
+            d.updated_at,
+    </sql>
+
+</mapper>
